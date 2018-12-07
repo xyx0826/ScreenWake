@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScreenWake"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ScreenWake" SizeToContent="WidthAndHeight"
+        Closing="Window_Closing">
     <Grid>
-        
+        <StackPanel Orientation="Vertical">
+            <Label Content="Power Line State" FontWeight="Bold"/>
+            <Label Content="{Binding PowerLineState}"/>
+            <Label Content="Display Timeout" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".6*"/>
+                    <ColumnDefinition Width=".2*"/>
+                    <ColumnDefinition Width=".2*"/>
+                </Grid.ColumnDefinitions>
+                <Slider Name="TimeoutSlider" Grid.Column="0" 
+                        Value="{Binding DisplayTimeout, UpdateSourceTrigger=PropertyChanged}" 
+                        Minimum="0" Maximum="1800" TickFrequency="5" 
+                        TickPlacement="BottomRight" IsSnapToTickEnabled="True" Margin="5,0"/>
+                <TextBox Grid.Column="1" 
+                         Text="{Binding DisplayTimeout, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Grid.Column="2"
+                       Content="s"/>
+            </Grid>
+            <Separator Margin="5"/>
+            <Button Name="Refresh" Margin="3" Content="Refresh" Click="Button_Click"/>
+            <CheckBox Content="Persist on Close" Margin="3" HorizontalAlignment="Center" IsChecked="{Binding Persistance}"/>
+        </StackPanel>
     </Grid>
 </Window>
